@@ -6,9 +6,9 @@ an endpoint to seed the database.
 
 ### APIs endpoints:
 ##### [GET]
-- > http://127.0.0.1:5000/api/documents/failed_extraction/<customerId>
-- > http://127.0.0.1:5000/api/documents/failed_ingestion_count/<customerId>
-- > http://127.0.0.1:5000/api/documents/summery/<customerId>
+- > http://127.0.0.1:5000/api/documents/failed_extraction/customerId
+- > http://127.0.0.1:5000/api/documents/failed_ingestion_count/customerId
+- > http://127.0.0.1:5000/api/documents/summery/customerId
 ##### [POST]
 - > http://127.0.0.1:5000/api/documents/seed 
 
