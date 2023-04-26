@@ -17,9 +17,6 @@ DB_HOST = os.getenv('DB_HOST')
 DB_NAME = os.getenv('DB_NAME')
 
 app = Flask(__name__)
-@app.route('/', methods=['GET'])
-def index():
-    return {"max":"LINe"}
 
 db_uri = f'mysql+pymysql://{DB_USERNAME}:{DB_PASSWORD}@{DB_HOST}/'  # Replace with your database URI
 db_name = DB_NAME  # Replace with the desired database name
@@ -101,7 +98,6 @@ with app.app_context():
 #--------------------------------#
 #---------APIs-------------------#
 #--------------------------------#
-
 
 # API endpoint for documents with FAILED extractionStatus for a particular customerID
 @app.route('/api/documents/failed_extraction/<customer_id>', methods=['GET'])
