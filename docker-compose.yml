@@ -1,0 +1,55 @@
+version: '3'
+services:
+  app:
+    image: arch/flask_app:latest
+    container_name: flask_app
+    restart: unless-stopped
+    labels:
+      project: "Architrave"
+      day: "26 April 2023"
+    build:
+      # build the image from Dockerfile
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      # set database, memcached etc credentials
+      DB_HOST: mysql
+      DB_NAME: docs_db
+      DB_USERNAME: root
+      DB_PASSWORD: connect10
+    volumes:
+      - ./app:/app
+    links:
+      # network connection with these services
+      - mysql
+    depends_on:
+      # build those images first
+      - mysql
+    ports:
+      # bind on our 5000 port because most people have 80, 8080 already bound
+      - "5000:5000"
+
+  mysql:
+    container_name: flask_mysql
+    image: mysql
+    volumes:
+        # pass volume named mysql-data to mysql container
+      - mysql-data:/var/lib/mysql
+    restart: unless-stopped
+    labels:
+      project: "Architrave"
+      day: "26 April 2023"
+    
+    # ports:
+    #   - "3306:3306"
+    environment:
+      # credentials
+      MYSQL_ROOT_PASSWORD: connect10
+      MYSQL_DATABASE: docs_db
+      # MYSQL_USER: root
+      MYSQL_PASSWORD: connect10
+# volumes definition here
+volumes:
+  # just a persistance data
+  mysql-data:
+    driver: local
